@@ -1863,7 +1863,6 @@
 					"-I/opt/homebrew/opt/openssl/include",
 				);
 				OTHER_LDFLAGS = (
-					"-whatsloaded",
 					"-weak_framework",
 					PDFKit,
 					"-L/usr/local/opt/openssl/lib",
