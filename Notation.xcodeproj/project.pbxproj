@@ -48,11 +48,9 @@
 		212EEA2812EFBD1800F89538 /* Atalhos Incrivelmente Úteis.nvhelp in Resources */ = {isa = PBXBuildFile; fileRef = 212EEA2212EFBD1800F89538 /* Atalhos Incrivelmente Úteis.nvhelp */; };
 		212EEA2912EFBD1800F89538 /* Como funciona isso?.nvhelp in Resources */ = {isa = PBXBuildFile; fileRef = 212EEA2412EFBD1800F89538 /* Como funciona isso?.nvhelp */; };
 		212EEA2A12EFBD1800F89538 /* Este é o título de uma nota.nvhelp in Resources */ = {isa = PBXBuildFile; fileRef = 212EEA2612EFBD1800F89538 /* Este é o título de uma nota.nvhelp */; };
-		212EEAC112F085DB00F89538 /* AutoHyperlinks.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212EEAB812F085D100F89538 /* AutoHyperlinks.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		21317FAF1113840E00472211 /* Excruciatingly Useful Shortcuts.nvhelp in Resources */ = {isa = PBXBuildFile; fileRef = 21317FAD1113840E00472211 /* Excruciatingly Useful Shortcuts.nvhelp */; };
 		213621ED0B92413F008C0830 /* FindPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = 213621E70B92413F008C0830 /* FindPanel.nib */; };
 		213621F20B92414F008C0830 /* MultiTextFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 213621F00B92414F008C0830 /* MultiTextFinder.m */; };
-		213623FC0B92AA6E008C0830 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 213623E50B92AA4E008C0830 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		213FAD530B3C6B52004C74BD /* FSExchangeObjectsCompat.c in Sources */ = {isa = PBXBuildFile; fileRef = 213FAD520B3C6B52004C74BD /* FSExchangeObjectsCompat.c */; };
 		213FB0240B3CB1C4004C74BD /* PTKeyboardIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 213FB0230B3CB1C4004C74BD /* PTKeyboardIcon.tiff */; };
 		214141B612FC64BE0019D275 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 214141B512FC64BE0019D275 /* dsa_pub.pem */; };
@@ -213,8 +211,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				212EEAC112F085DB00F89538 /* AutoHyperlinks.framework in CopyFiles */,
-				213623FC0B92AA6E008C0830 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,10 +285,8 @@
 		212DCA460A6AD28700F74E46 /* EncodingsManager.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = EncodingsManager.m; sourceTree = "<group>"; };
 		212DCF5F0A6DEECB00F74E46 /* DeletionManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DeletionManager.h; sourceTree = "<group>"; };
 		212DCF600A6DEECB00F74E46 /* DeletionManager.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = DeletionManager.m; sourceTree = "<group>"; };
-		212EEAB812F085D100F89538 /* AutoHyperlinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AutoHyperlinks.framework; sourceTree = "<group>"; };
 		213621EF0B92414F008C0830 /* MultiTextFinder.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MultiTextFinder.h; sourceTree = "<group>"; };
 		213621F00B92414F008C0830 /* MultiTextFinder.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MultiTextFinder.m; sourceTree = "<group>"; };
-		213623E50B92AA4E008C0830 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		21395BB30B7FDB85007BCFAA /* Notation.freqorder */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Notation.freqorder; sourceTree = "<group>"; };
 		21395BC60B7FDD35007BCFAA /* Notation.launchorder */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Notation.launchorder; sourceTree = "<group>"; };
 		213FAD510B3C6B52004C74BD /* FSExchangeObjectsCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSExchangeObjectsCompat.h; sourceTree = "<group>"; };
@@ -726,9 +720,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				212EEAB812F085D100F89538 /* AutoHyperlinks.framework */,
 				21B54C011134F2E800E163A1 /* IOKit.framework */,
-				213623E50B92AA4E008C0830 /* Sparkle.framework */,
 				210C07230B6BF0A1005D23A8 /* WebKit.framework */,
 				21973FBC0B0060C80046683E /* Security.framework */,
 				214494F80ADC7C8D00E2A2B6 /* SecurityInterface.framework */,
@@ -1861,18 +1853,23 @@
 				OTHER_CFLAGS = (
 					"-I/usr/local/opt/openssl/include",
 					"-I/opt/homebrew/opt/openssl/include",
+					"-I/nix/store/r9dm9dhafnipff77yl4bv1ncjgh4afsi-openssl-3.0.13-dev/include",
 				);
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					PDFKit,
 					"-L/usr/local/opt/openssl/lib",
 					"-L/opt/homebrew/opt/openssl/lib",
+					"-L/nix/store/bc10sl6fda9mb598n3gld2fwqr24zq7p-openssl-3.0.13/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.notational.velocity;
 				PRODUCT_NAME = "Notational Velocity";
 				SDKROOT = macosx;
 				STRIP_STYLE = "non-global";
-				WARNING_CFLAGS = "-pg";
+				WARNING_CFLAGS = (
+					"-pg",
+					"-Wno-error=incompatible-function-pointer-types",
+				);
 				WARNING_LDFLAGS = "";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
@@ -1934,6 +1931,7 @@
 				OTHER_CFLAGS = (
 					"-I/usr/local/opt/openssl/include",
 					"-I/opt/homebrew/opt/openssl/include",
+					"-I/nix/store/r9dm9dhafnipff77yl4bv1ncjgh4afsi-openssl-3.0.13-dev/include",
 				);
 				OTHER_LDFLAGS = (
 					"-L/usr/local/opt/openssl/lib",
@@ -2008,6 +2006,7 @@
 				OTHER_CFLAGS = (
 					"-I/usr/local/opt/openssl/include",
 					"-I/opt/homebrew/opt/openssl/include",
+					"-I/nix/store/r9dm9dhafnipff77yl4bv1ncjgh4afsi-openssl-3.0.13-dev/include",
 				);
 				OTHER_LDFLAGS = (
 					"-weak_framework",
