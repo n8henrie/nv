@@ -25,7 +25,7 @@
 #import "NSCollection_utils.h"
 #import "GlobalPrefs.h"
 #import "NSString_NV.h"
-#import <AutoHyperlinks/AutoHyperlinks.h>
+//#import <AutoHyperlinks/AutoHyperlinks.h>
 
 
 NSString *NVHiddenDoneTagAttributeName = @"NVDoneTag";
@@ -124,7 +124,7 @@ static BOOL _StringWithRangeIsProbablyObjC(NSString *string, NSRange blockRange)
 	[self removeAttribute:NSLinkAttributeName range:range];
 	[self indentTextLists];
 	[self restyleTextToFont:[[GlobalPrefs defaultPrefs] noteBodyFont] usingBaseFont:nil];
-	[self addLinkAttributesForRange:range];
+//	[self addLinkAttributesForRange:range];
 	[self addStrikethroughNearDoneTagsForRange:range];
 	[self addAttributesForMarkdownHeadingLinesInRange:range];
 }
@@ -209,39 +209,39 @@ static BOOL _StringWithRangeIsProbablyObjC(NSString *string, NSRange blockRange)
 	return rangesChanged > 0;
 }
 
-- (void)addLinkAttributesForRange:(NSRange)changedRange {
-	
-	if (!changedRange.length)
-		return;
-	
-	//lazily loads Adium's BSD-licensed Auto-Hyperlinks:
-	//http://trac.adium.im/wiki/AutoHyperlinksFramework
-	
-	static Class AHHyperlinkScanner = Nil;
-	static Class AHMarkedHyperlink = Nil;
-	if (!AHHyperlinkScanner || !AHMarkedHyperlink) {
-		if (![[NSBundle bundleWithPath:[[[NSBundle mainBundle] privateFrameworksPath] stringByAppendingPathComponent:@"AutoHyperlinks.framework"]] load]) {
-			NSLog(@"Could not load AutoHyperlinks framework");
-			return;
-		}
-		AHHyperlinkScanner = NSClassFromString(@"AHHyperlinkScanner");
-		AHMarkedHyperlink = NSClassFromString(@"AHMarkedHyperlink");
-	}
-	
-	id scanner = [AHHyperlinkScanner hyperlinkScannerWithString:[[self string] substringWithRange:changedRange]];
-	id markedLink = nil;
-	while ((markedLink = [scanner nextURI])) {
-		NSURL *markedLinkURL = nil;
-		if ((markedLinkURL = [markedLink URL]) && !([markedLinkURL isFileURL] && [[markedLinkURL absoluteString] 
-																				  rangeOfString:@"/.file/" options:NSLiteralSearch].location != NSNotFound)) {
-			[self addAttribute:NSLinkAttributeName value:markedLinkURL 
-						 range:NSMakeRange([markedLink range].location + changedRange.location, [markedLink range].length)];
-		}
-	}
-
-	//also detect double-bracketed URLs here
-	[self _addDoubleBracketedNVLinkAttributesForRange:changedRange];
-}
+//- (void)addLinkAttributesForRange:(NSRange)changedRange {
+//	
+//	if (!changedRange.length)
+//		return;
+//	
+//	//lazily loads Adium's BSD-licensed Auto-Hyperlinks:
+//	//http://trac.adium.im/wiki/AutoHyperlinksFramework
+//	
+//	static Class AHHyperlinkScanner = Nil;
+//	static Class AHMarkedHyperlink = Nil;
+//	if (!AHHyperlinkScanner || !AHMarkedHyperlink) {
+//		if (![[NSBundle bundleWithPath:[[[NSBundle mainBundle] privateFrameworksPath] stringByAppendingPathComponent:@"AutoHyperlinks.framework"]] load]) {
+//			NSLog(@"Could not load AutoHyperlinks framework");
+//			return;
+//		}
+//		AHHyperlinkScanner = NSClassFromString(@"AHHyperlinkScanner");
+//		AHMarkedHyperlink = NSClassFromString(@"AHMarkedHyperlink");
+//	}
+//	
+//	id scanner = [AHHyperlinkScanner hyperlinkScannerWithString:[[self string] substringWithRange:changedRange]];
+//	id markedLink = nil;
+//	while ((markedLink = [scanner nextURI])) {
+//		NSURL *markedLinkURL = nil;
+//		if ((markedLinkURL = [markedLink URL]) && !([markedLinkURL isFileURL] && [[markedLinkURL absoluteString] 
+//																				  rangeOfString:@"/.file/" options:NSLiteralSearch].location != NSNotFound)) {
+//			[self addAttribute:NSLinkAttributeName value:markedLinkURL 
+//						 range:NSMakeRange([markedLink range].location + changedRange.location, [markedLink range].length)];
+//		}
+//	}
+//
+//	//also detect double-bracketed URLs here
+//	[self _addDoubleBracketedNVLinkAttributesForRange:changedRange];
+//}
 
 - (void)_addDoubleBracketedNVLinkAttributesForRange:(NSRange)changedRange {
 	//add link attributes for [[wiki-style links to other notes or search terms]] 

@@ -1848,7 +1848,6 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_GENERATE_MAP_FILE = YES;
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = "2.0 β7";
 				OTHER_CFLAGS = (
 					"-I/usr/local/opt/openssl/include",
@@ -1858,13 +1857,10 @@
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					PDFKit,
-					"-L/usr/local/opt/openssl/lib",
-					"-L/opt/homebrew/opt/openssl/lib",
 					"-L/nix/store/bc10sl6fda9mb598n3gld2fwqr24zq7p-openssl-3.0.13/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.notational.velocity;
 				PRODUCT_NAME = "Notational Velocity";
-				SDKROOT = macosx;
 				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = (
 					"-pg",
@@ -1924,23 +1920,15 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.9;
 				MARKETING_VERSION = "2.0 β7";
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-I/usr/local/opt/openssl/include",
 					"-I/opt/homebrew/opt/openssl/include",
 					"-I/nix/store/r9dm9dhafnipff77yl4bv1ncjgh4afsi-openssl-3.0.13-dev/include",
 				);
-				OTHER_LDFLAGS = (
-					"-L/usr/local/opt/openssl/lib",
-					"-L/opt/homebrew/opt/openssl/lib",
-				);
+				OTHER_LDFLAGS = "-L/nix/store/bc10sl6fda9mb598n3gld2fwqr24zq7p-openssl-3.0.13/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = net.notational.velocity;
 				PRODUCT_NAME = "Notational Velocity";
-				SDKROOT = macosx;
-				"SDKROOT[arch=x86_64]" = macosx;
 				SECTORDER_FLAGS = (
 					"-sectorder",
 					__TEXT,
@@ -1951,6 +1939,7 @@
 				);
 				STRIP_INSTALLED_PRODUCT = YES;
 				STRIP_STYLE = all;
+				WARNING_CFLAGS = "-Wno-error=incompatible-function-pointer-types";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -2001,22 +1990,14 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = "2.0 β7";
 				OTHER_CFLAGS = (
 					"-I/usr/local/opt/openssl/include",
 					"-I/opt/homebrew/opt/openssl/include",
 					"-I/nix/store/r9dm9dhafnipff77yl4bv1ncjgh4afsi-openssl-3.0.13-dev/include",
 				);
-				OTHER_LDFLAGS = (
-					"-weak_framework",
-					PDFKit,
-					"-L/usr/local/opt/openssl/lib",
-					"-L/opt/homebrew/opt/openssl/lib",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.notational.velocity;
 				PRODUCT_NAME = "Notational Velocity";
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Default;
@@ -2024,6 +2005,7 @@
 		212B842809780B5000F3597F /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = arm64;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -2060,17 +2042,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				"SDKROOT[arch=x86_64]" = macosx10.5;
 			};
 			name = Development;
 		};
 		212B842909780B5000F3597F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = arm64;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -2106,16 +2085,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
-				SDKROOT = macosx;
-				"SDKROOT[arch=x86_64]" = macosx10.5;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Deployment;
 		};
 		212B842A09780B5000F3597F /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = arm64;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -2151,10 +2128,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
-				SDKROOT = macosx;
-				"SDKROOT[arch=x86_64]" = macosx10.5;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Default;
 		};

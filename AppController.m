@@ -179,24 +179,24 @@ void outletObjectAwoke(id sender) {
 	
 	//connect sparkle programmatically to avoid loading its framework at nib awake;
 	
-	if (!NSClassFromString(@"SUUpdater")) {
-		NSString *frameworkPath = [[[NSBundle bundleForClass:[self class]] privateFrameworksPath] stringByAppendingPathComponent:@"Sparkle.framework"];
-		if ([[NSBundle bundleWithPath:frameworkPath] load]) {
-			id updater = [NSClassFromString(@"SUUpdater") performSelector:@selector(sharedUpdater)];
-			[sparkleUpdateItem setTarget:updater];
-			[sparkleUpdateItem setAction:@selector(checkForUpdates:)];
-			if (![[prefsController notationPrefs] firstTimeUsed]) {
-				//don't do anything automatically on the first launch; afterwards, check every 4 days, as specified in Info.plist
-				SEL checksSEL = @selector(setAutomaticallyChecksForUpdates:);
-                typedef void (*UpdaterMethod)(id, SEL, BOOL);
-                UpdaterMethod updaterChecks;
-                updaterChecks = (UpdaterMethod)[updater methodForSelector:checksSEL];
-                updaterChecks(updater, checksSEL, YES);
-			}
-		} else {
-			NSLog(@"Could not load %@!", frameworkPath);
-		}
-	}
+//	if (!NSClassFromString(@"SUUpdater")) {
+//		NSString *frameworkPath = [[[NSBundle bundleForClass:[self class]] privateFrameworksPath] stringByAppendingPathComponent:@"Sparkle.framework"];
+//		if ([[NSBundle bundleWithPath:frameworkPath] load]) {
+//			id updater = [NSClassFromString(@"SUUpdater") performSelector:@selector(sharedUpdater)];
+//			[sparkleUpdateItem setTarget:updater];
+//			[sparkleUpdateItem setAction:@selector(checkForUpdates:)];
+//			if (![[prefsController notationPrefs] firstTimeUsed]) {
+//				//don't do anything automatically on the first launch; afterwards, check every 4 days, as specified in Info.plist
+//				SEL checksSEL = @selector(setAutomaticallyChecksForUpdates:);
+//                typedef void (*UpdaterMethod)(id, SEL, BOOL);
+//                UpdaterMethod updaterChecks;
+//                updaterChecks = (UpdaterMethod)[updater methodForSelector:checksSEL];
+//                updaterChecks(updater, checksSEL, YES);
+//			}
+//		} else {
+//			NSLog(@"Could not load %@!", frameworkPath);
+//		}
+//	}
 	
 	[NSApp setServicesProvider:self];
 }
