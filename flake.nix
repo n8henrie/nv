@@ -21,10 +21,12 @@
       #   program = "${self.packages.${system}.default}/bin/${name}";
       # };
       devShells.${system}.default = pkgs.mkShell {
-        nativeBuildInputs = with pkgs; [
-          darwin.Libsystem
-          openssl.dev
-        ];
+        # WARNING_CFLAGS = -Wno-error=incompatible-function-pointer-types
+        # env.CXXFLAGS = pkgs.lib.concatStringsSep " " [
+        #   "-Wno-format-security"
+        #   "-Wno-error=incompatible-function-pointer-types"
+        # ];
+        # nativeBuildInputs = with pkgs; [];
         buildInputs =
           with pkgs;
           [

@@ -2,58 +2,97 @@
   lib,
   stdenv,
   openssl,
-  xcbuild,
   darwin,
+  zlib,
 }:
 stdenv.mkDerivation {
   name = "notational-velocity";
   version = "2.0 β7";
   src = lib.cleanSource ./.;
-  nativeBuildInputs = [ xcbuild ];
   buildInputs =
     [
       darwin.Libsystem
-      openssl
+      openssl.dev
+      zlib
     ]
     ++ (with darwin.apple_sdk.frameworks; [
       AppKit
-      # Carbon
+      ApplicationServices
+      Carbon
       Cocoa
+      CoreServices
+      Foundation
+      IOKit
+      Security
+      SecurityInterface
+      SystemConfiguration
       WebKit
     ]);
-  dontUnpack = true;
+
+  NIX_CFLAGS_COMPILE = [
+    "-Wno-format-security"
+    "-Wno-error=incompatible-function-pointer-types"
+  ];
+
   buildPhase = ''
     runHook preBuild
 
-    set -x
+    clang \
+      -x objective-c-header \
+      -c Notation_Prefix.pch \
+      -o Notation_Prefix-objc.pch.gch
 
-    # mkdir -p $out/"Notational Velocity.app/Contents/Resources"
+    clang \
+      -x c-header \
+      -c Notation_Prefix.pch \
+      -o Notation_Prefix-c.pch.gch
 
-    # CONFIGURATION_BUILD_DIR=.
-    pwd
-    ls -ld .
+    mapfile -d "" -t cfiles < <(find . -type f -name '*.c' -print0)
+    clang \
+      -x c \
+      -include Notation_Prefix-c.pch \
+      -c \
+      "''${cfiles[@]}"
 
-    mkdir -p "Products/Deployment/Notational Velocity.app/Contents/MacOS"
-    find .
+    mapfile -d "" -t objcfiles < <(find . -type f -name '*.m' -print0)
+    clang \
+      -x objective-c \
+      -include Notation_Prefix-objc.pch \
+      -I. \
+      -I./JSON \
+      -I./PTHotKeys \
+      -I./ODBEditor \
+      -c \
+      "''${objcfiles[@]}"
 
-      # -jobs $NIX_BUILD_CORES \
-    xcodebuild build \
-      SYMROOT=$PWD/Products OBJROOT=$PWD/Intermedates \
-      -configuration Deployment \
-      -project $src/Notation.xcodeproj \
-      -destination generic/platform=macOS \
-      -arch ${stdenv.hostPlatform.darwinArch} || true
-
-    find .
-
-    exit 1
-
-    # clang -cc1 -emit-pch -o Notation_Prefix.pch.gch Notation_Prefix.pch
-    # clang -cc1 -emit-pch -I${darwin.Libsystem}/include -o Notation_Prefix.pch.gch $src/Notation_Prefix.pch
-    # clang -x c-header -c $src/Notation_Prefix.pch -o Notation_Prefix.pch.gch
-    # clang -x objective-c -include-pch Notation_Prefix.pch.gch $src/*.m
-    # clang -objc -include-pch Notation_Prefix.pch.gch $src/*.m
+    mapfile -d "" -t ofiles < <(find . -type f -name '*.o' -print0)
+    clang \
+      -lcrypto \
+      -lz \
+      -framework Cocoa \
+      -framework Carbon \
+      -framework CoreServices \
+      -framework SecurityInterface \
+      -framework Security \
+      -framework WebKit \
+      -framework ApplicationServices \
+      -framework SystemConfiguration \
+      -framework IOKit \
+      "''${ofiles[@]}" \
+      -o "Notational Velocity"
 
     runHook postBuild
+  '';
+
+  installPhase = ''
+    runHook preInstall
+
+    dest="$out/Applications/Notational Velocity.app"
+    mkdir -p "$dest"/Contents/{MacOS,Resources}
+    cp "Notational Velocity" "$dest"/Contents/MacOS/
+    cp "Info.plist" "$dest"/Contents/
+    find . -type d -name '*.lproj' -exec cp -r -t "$dest"/Contents/Resources/ {} +
+
+    runHook postInstall
   '';
 }
