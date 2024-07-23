@@ -11,7 +11,6 @@ stdenv.mkDerivation {
   src = lib.cleanSource ./.;
   buildInputs =
     [
-      darwin.Libsystem
       openssl.dev
       zlib
     ]
