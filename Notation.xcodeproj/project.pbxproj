@@ -1849,15 +1849,10 @@
 				LD_GENERATE_MAP_FILE = YES;
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
 				MARKETING_VERSION = "2.0 β7";
-				OTHER_CFLAGS = (
-					"-I/usr/local/opt/openssl/include",
-					"-I/opt/homebrew/opt/openssl/include",
-					"-I/nix/store/r9dm9dhafnipff77yl4bv1ncjgh4afsi-openssl-3.0.13-dev/include",
-				);
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					PDFKit,
-					"-L/nix/store/bc10sl6fda9mb598n3gld2fwqr24zq7p-openssl-3.0.13/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.notational.velocity;
 				PRODUCT_NAME = "Notational Velocity";
@@ -1921,12 +1916,8 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
 				MARKETING_VERSION = "2.0 β7";
-				OTHER_CFLAGS = (
-					"-I/usr/local/opt/openssl/include",
-					"-I/opt/homebrew/opt/openssl/include",
-					"-I/nix/store/r9dm9dhafnipff77yl4bv1ncjgh4afsi-openssl-3.0.13-dev/include",
-				);
-				OTHER_LDFLAGS = "-L/nix/store/bc10sl6fda9mb598n3gld2fwqr24zq7p-openssl-3.0.13/lib";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = net.notational.velocity;
 				PRODUCT_NAME = "Notational Velocity";
 				SECTORDER_FLAGS = (
@@ -1991,11 +1982,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
 				MARKETING_VERSION = "2.0 β7";
-				OTHER_CFLAGS = (
-					"-I/usr/local/opt/openssl/include",
-					"-I/opt/homebrew/opt/openssl/include",
-					"-I/nix/store/r9dm9dhafnipff77yl4bv1ncjgh4afsi-openssl-3.0.13-dev/include",
-				);
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = net.notational.velocity;
 				PRODUCT_NAME = "Notational Velocity";
 				WRAPPER_EXTENSION = app;
