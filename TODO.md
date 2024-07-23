@@ -1,0 +1,2 @@
+- Build with GitHub Actions
+- Fix icon
