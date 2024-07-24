@@ -6,8 +6,11 @@
   zlib,
   makeWrapper,
 }:
+let
+  pname = "notational-velocity";
+in
 stdenv.mkDerivation {
-  name = "notational-velocity";
+  inherit pname;
   version = "2.0 β7";
   src = lib.cleanSource ./.;
   nativeBuildInputs = [ makeWrapper ];
