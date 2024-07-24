@@ -4,11 +4,13 @@
   openssl,
   darwin,
   zlib,
+  makeWrapper,
 }:
 stdenv.mkDerivation {
   name = "notational-velocity";
   version = "2.0 β7";
   src = lib.cleanSource ./.;
+  nativeBuildInputs = [ makeWrapper ];
   buildInputs =
     [
       openssl.dev
@@ -91,6 +93,8 @@ stdenv.mkDerivation {
     cp "Notational Velocity" "$dest"/Contents/MacOS/
     cp "Info.plist" "$dest"/Contents/
     find . -type d -name '*.lproj' -exec cp -r -t "$dest"/Contents/Resources/ {} +
+
+    makeWrapper "$dest/Contents/MacOS/Notational Velocity" "$out/bin/${pname}"
 
     runHook postInstall
   '';
