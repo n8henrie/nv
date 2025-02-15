@@ -96,6 +96,8 @@ stdenv.mkDerivation {
     cp "Notational Velocity" "$dest"/Contents/MacOS/
     cp "Info.plist" "$dest"/Contents/
     find . -type d -name '*.lproj' -exec cp -r -t "$dest"/Contents/Resources/ {} +
+    cp -t "$dest"/Contents/Resources/ \
+      Images/Notality.icns
 
     makeWrapper "$dest/Contents/MacOS/Notational Velocity" "$out/bin/${pname}"
 
